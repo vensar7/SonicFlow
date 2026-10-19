@@ -1,29 +1,59 @@
 # SonicFlow Studio
 
-Desktop soundboard and realtime voice effects with a phone-based LAN controller.
+Звуковая панель, обработка голоса в реальном времени и мобильный пульт для управления звуками по локальной сети.
 
-## Run
+## Скачать и установить
+
+Скачайте последний установщик `SonicFlow Setup.exe` в разделе **Releases** этого репозитория и запустите его. Установщик создаст ярлык в меню «Пуск» и на рабочем столе.
+
+Windows может показать предупреждение SmartScreen, если установщик не подписан. Запускайте установщик только если скачали его из доверенного источника.
+
+## Звуковая панель
+
+1. Откройте раздел **Звуки** и нажмите **Добавить звук**.
+2. Выберите аудиофайл MP3, WAV или OGG размером до 3 МБ.
+3. Нажмите кнопку звука для воспроизведения. Чтобы назначить клавишу, нажмите значок клавиатуры на карточке звука и затем нужную клавишу.
+4. Настройте громкость звука и общий уровень. Кнопка **Остановить** прерывает воспроизведение.
+
+Добавленные звуки и настройки сохраняются автоматически на этом компьютере.
+
+## Обработка голоса
+
+1. Откройте раздел **Голос**.
+2. Выберите микрофон и голосовой выход.
+3. Выберите пресет или настройте высоту тона, drive, эхо, пространство, фильтр и уровень выхода.
+4. Нажмите **Включить микрофон**.
+
+### Вывод голоса через VB-CABLE
+
+VB-CABLE — виртуальное аудиоустройство. Установите его отдельно с [сайта VB-Audio](https://vb-audio.com/Cable/), затем:
+
+1. В SonicFlow выберите физический микрофон как вход.
+2. В качестве голосового выхода SonicFlow выберите **CABLE Input**.
+3. В Discord, OBS или другой программе выберите **CABLE Output** как микрофон.
+
+Чтобы слышать обработанный голос в наушниках, включите самопрослушивание и выберите устройство вывода в настройках SonicFlow.
+
+## Мобильный пульт
+
+Телефон и компьютер должны быть подключены к одной Wi-Fi сети.
+
+1. В SonicFlow нажмите **Подключить пульт**.
+2. Откройте камеру телефона и отсканируйте QR-код.
+3. Нажимайте кнопки на открывшейся странице, чтобы запускать звуки на компьютере.
+
+Если Windows попросит разрешение брандмауэра, разрешите SonicFlow работу в частных сетях. Пульт подключается напрямую по локальной сети; облачный аккаунт не требуется.
+
+## Если что-то не работает
+
+- **Микрофон не отображается:** проверьте подключение устройства и разрешения Windows для доступа к микрофону.
+- **В приложении для звонков нет обработанного голоса:** проверьте, что в SonicFlow выбран **CABLE Input**, а в Discord или OBS — **CABLE Output**.
+- **Телефон не подключается:** убедитесь, что оба устройства в одной сети Wi-Fi, и разрешите SonicFlow подключения в частной сети Windows.
+
+## Сборка из исходного кода
+
+Для разработки нужны Node.js и npm.
 
 ```sh
 npm install
 npm run dev
-```
-
-`npm run dev` opens the Electron studio and exposes the phone controller on the local network. Scan the QR code in the studio; both devices must be on the same Wi-Fi. If Windows Firewall asks, allow SonicFlow on your private network.
-
-## VB-CABLE
-
-1. In SonicFlow, open **Voice** and choose your physical microphone as input.
-2. Choose **CABLE Input** as the voice output.
-3. In Discord, OBS, or another app, choose **CABLE Output** as its microphone.
-
-For soundboard audio, choose **CABLE Input** in the Sound pad output selector as well.
-
-## Build
-
-```sh
-npm run build
-npm run package
-```
-
-`npm run package` creates a Windows installer. `npm run lint` checks renderer and Electron source files.
